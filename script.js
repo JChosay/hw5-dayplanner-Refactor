@@ -8,10 +8,10 @@ var rightNow = new Date();
 var date = moment().format('MMMM Do YYYY')
 var currentDay = $('#currentDay');
     currentDay.text( weekday + ", " + date );
-// var timeBlocks = document.getElementsByClassName('form-control');
-var buttons = document.getElementsByClassName('btn btn-outline-secondary saveBtn');
 
 function blockPop(){
+    //! Constructs the time blocks and populates them on the screen
+    console.log("OHIO STATE MUST BE DESTROYED.");
     for (var i=1; i<15; i++){
         
         var oneDiv = $('<div>');
@@ -67,7 +67,6 @@ function blockPop(){
             var slotIndex = parseInt(this.id,10);
             var slotContent = document.getElementById(slotIndex);
             var slotContentText = slotContent.value;
-
             var memoryStamp = JSON.parse(localStorage.getItem("memoryStamp"));
                 
             if(memoryStamp===null){
@@ -105,31 +104,23 @@ function blockPop(){
         timeblockIndex ++
     }
     var timeBlocks = $('.form-control');
-    console.log(timeBlocks);
 
     for (var i=0; i<timeBlocks.length; i++){
     
         if (timeBlocks[i].id > hourNow){
-            // var grabbit = document.getElementById(timeBlocks[i].id);
             var grabbit = $(timeBlocks[i]);
-                // grabbit.style.backgroundColor = "green";
                 grabbit.css('background-color', 'green');
         }else if (timeBlocks[i].id < hourNow){
-            // var grabbit = document.getElementById(timeBlocks[i].id);
             var grabbit = $(timeBlocks[i]);
-                // grabbit.style.backgroundColor = "grey";
                 grabbit.css('background-color', 'grey');
         }else{
-            // var grabbit = document.getElementById(timeBlocks[i].id);
             var grabbit = $(timeBlocks[i]);
-                // grabbit.style.backgroundColor = "red";
                 grabbit.css('background-color','red');
         }
     }
-    console.log(timeBlocks);
-    console.log(timeBlocks.length);
     var memoryStorage = JSON.parse(localStorage.getItem('memoryStamp'));
-    //finally, once everything has loaded, calls loadTasks if there is content in Local Storage.
+    
+    //! finally, once everything has loaded, calls loadTasks if there is content in Local Storage.
     if (memoryStorage!=null){
         loadTasks();
     }
@@ -137,9 +128,10 @@ function blockPop(){
 
 blockPop();
 
-//function to load messages freom local Storage into the appropriate input field.
+//! function to load messages from local Storage into the appropriate input field.
 function loadTasks(){
     var memoryStorage = JSON.parse(localStorage.getItem('memoryStamp'));
+    
     for(var i=0; i<memoryStorage.length; i++){
         var message = memoryStorage[i].message;
         var hour = memoryStorage[i].time;
