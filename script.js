@@ -8,7 +8,7 @@ var rightNow = new Date();
 var date = moment().format('MMMM Do YYYY')
 var currentDay = $('#currentDay');
     currentDay.text( weekday + ", " + date );
-var timeBlocks = document.getElementsByClassName('form-control');
+// var timeBlocks = document.getElementsByClassName('form-control');
 var buttons = document.getElementsByClassName('btn btn-outline-secondary saveBtn');
 
 function blockPop(){
@@ -92,7 +92,6 @@ function blockPop(){
                 localStorage.setItem('memoryStamp',JSON.stringify(memoryStamp));
             }
         })
-        //!   end button click event code...
 
         saveButtons.text('Save');
         oneSpan.append(timeText);
@@ -105,6 +104,8 @@ function blockPop(){
 
         timeblockIndex ++
     }
+    var timeBlocks = $('.form-control');
+
     for (var i=0; i<timeBlocks.length; i++){
     
         if (timeBlocks[i].id > hourNow){
