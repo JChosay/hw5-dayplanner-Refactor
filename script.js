@@ -105,18 +105,25 @@ function blockPop(){
         timeblockIndex ++
     }
     var timeBlocks = $('.form-control');
+    console.log(timeBlocks);
 
     for (var i=0; i<timeBlocks.length; i++){
     
         if (timeBlocks[i].id > hourNow){
-            var grabbit = document.getElementById(timeBlocks[i].id);
-                grabbit.style.backgroundColor = "green";
+            // var grabbit = document.getElementById(timeBlocks[i].id);
+            var grabbit = $(timeBlocks[i]);
+                // grabbit.style.backgroundColor = "green";
+                grabbit.css('background-color', 'green');
         }else if (timeBlocks[i].id < hourNow){
-            var grabbit = document.getElementById(timeBlocks[i].id);
-                grabbit.style.backgroundColor = "grey";
+            // var grabbit = document.getElementById(timeBlocks[i].id);
+            var grabbit = $(timeBlocks[i]);
+                // grabbit.style.backgroundColor = "grey";
+                grabbit.css('background-color', 'grey');
         }else{
-            var grabbit = document.getElementById(timeBlocks[i].id);
-                grabbit.style.backgroundColor = "red";
+            // var grabbit = document.getElementById(timeBlocks[i].id);
+            var grabbit = $(timeBlocks[i]);
+                // grabbit.style.backgroundColor = "red";
+                grabbit.css('background-color','red');
         }
     }
     console.log(timeBlocks);
