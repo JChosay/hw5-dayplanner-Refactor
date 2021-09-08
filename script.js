@@ -1,68 +1,69 @@
 //declare a whole bunch of global variables
 var timeblockIndex = 7;
-var container = document.getElementById('container');
+var container = $('#container');
 var weekday = moment().format('dddd');
 var hourNowFull = moment().format('HH');
 var hourNow = parseInt(hourNowFull,10);
 var rightNow = new Date();
 var date = moment().format('MMMM Do YYYY')
-var currentDay = document.getElementById('currentDay');
-    currentDay.innerHTML = weekday+", "+date;
+var currentDay = $('#currentDay');
+    currentDay.text( weekday + ", " + date );
 var timeBlocks = document.getElementsByClassName('form-control');
 var buttons = document.getElementsByClassName('btn btn-outline-secondary saveBtn');
 
-//populates the html container with the timeblocks to hold content
 function blockPop(){
     for (var i=1; i<15; i++){
         
-        var oneDiv = document.createElement('div');
-            oneDiv.setAttribute('class','input-group input-group-lg');
-        var twoDiv = document.createElement('div');
-            twoDiv.setAttribute('class','input-group-prepend');
-        var oneSpan = document.createElement('span');
-            oneSpan.setAttribute('class','input-group-text');
-            oneSpan.setAttribute('id','inputGroup-sizing-lg');
+        var oneDiv = $('<div>');
+            oneDiv.attr('class','input-group input-group-lg');
+        
+        var twoDiv = $('<div>');
+            twoDiv.attr('class','input-group-prepend');
+        
+        var oneSpan = $('<span>');
+            oneSpan.attr('class','input-group-text');
+            oneSpan.attr('id','inputGroup-sizing-lg');
 
-        // Adds the correct time text for each timeblock as the function iterates            
+        //! Adds the correct time text for each timeblock as the function iterates            
         if (timeblockIndex < 12){
-            var timeText = document.createTextNode(timeblockIndex+" AM");
+            var timeText = timeblockIndex+" AM";
         }else if (timeblockIndex == 12){
-            var timeText = document.createTextNode(timeblockIndex+" PM");
+            var timeText = timeblockIndex+" PM";
         }else if (timeblockIndex == 13){
-            var timeText = document.createTextNode("1 PM");
+            var timeText = "1 PM";
         }else if (timeblockIndex == 14){
-            var timeText = document.createTextNode("2 PM");
+            var timeText = "2 PM";
         }else if (timeblockIndex == 15){
-            var timeText = document.createTextNode("3 PM");
+            var timeText = "3 PM";
         }else if (timeblockIndex == 16){
-            var timeText = document.createTextNode("4 PM");
+            var timeText = "4 PM";
         }else if (timeblockIndex == 17){
-            var timeText = document.createTextNode("5 PM");
+            var timeText = "5 PM";
         }else if (timeblockIndex == 18){
-            var timeText = document.createTextNode("6 PM");
+            var timeText = "6 PM";
         }else if (timeblockIndex == 19){
-            var timeText = document.createTextNode("7 PM");
+            var timeText = "7 PM";
         }else if (timeblockIndex == 20){
-            var timeText = document.createTextNode("8 PM");
+            var timeText = "8 PM";
         }
 
-        var inputText = document.createElement('input');
-            inputText.setAttribute('id',timeblockIndex);
-            inputText.setAttribute('type','text');
-            inputText.setAttribute('class','form-control');
-            inputText.setAttribute('aria-label','Large');
-            inputText.setAttribute('aria-describedby','inputGroup-sizing-sm');
+        var inputText = $('<input>');
+            inputText.attr('id', timeblockIndex);
+            inputText.attr('type','text');
+            inputText.attr('class','form-control');
+            inputText.attr('aria-label','Large');
+            inputText.attr('aria-describedby','inputGroup-sizing-sm');
 
-        var threeDiv = document.createElement('div');
-            threeDiv.setAttribute('class','input-group-append');
+        var threeDiv = $('<div>');
+            threeDiv.attr('class','input-group-append');
         
-        var saveButtons = document.createElement('button');
-            saveButtons.setAttribute('class','btn btn-outline-secondary saveBtn');
-            saveButtons.setAttribute('type','button');
-            saveButtons.setAttribute('id', timeblockIndex+"block");
+        var saveButtons = $('<button>');
+            saveButtons.attr('class','btn btn-outline-secondary saveBtn');
+            saveButtons.attr('type','button');
+            saveButtons.attr('id', timeblockIndex+"block");
    
-            //!button click function to save the text in the input field
-            saveButtons.addEventListener('click', function(){
+        //!button click function to save the text in the input field
+        saveButtons.on("click", function(){
             var slotIndex = parseInt(this.id,10);
             var slotContent = document.getElementById(slotIndex);
             var slotContentText = slotContent.value;
@@ -91,17 +92,16 @@ function blockPop(){
                 localStorage.setItem('memoryStamp',JSON.stringify(memoryStamp));
             }
         })
+        //!   end button click event code...
 
-        var buttonText = document.createTextNode('Save');
-            saveButtons.appendChild(buttonText);
-        
-            oneSpan.appendChild(timeText);
-            twoDiv.appendChild(oneSpan);
-            oneDiv.appendChild(twoDiv);
-            oneDiv.appendChild(inputText);
-            threeDiv.appendChild(saveButtons);
-            oneDiv.appendChild(threeDiv);
-            container.appendChild(oneDiv);
+        saveButtons.text('Save');
+        oneSpan.append(timeText);
+        twoDiv.append(oneSpan);
+        oneDiv.append(twoDiv);
+        oneDiv.append(inputText);
+        threeDiv.append(saveButtons);
+        oneDiv.append(threeDiv);
+        container.append(oneDiv);
 
         timeblockIndex ++
     }
@@ -118,6 +118,8 @@ function blockPop(){
                 grabbit.style.backgroundColor = "red";
         }
     }
+    console.log(timeBlocks);
+    console.log(timeBlocks.length);
     var memoryStorage = JSON.parse(localStorage.getItem('memoryStamp'));
     //finally, once everything has loaded, calls loadTasks if there is content in Local Storage.
     if (memoryStorage!=null){
